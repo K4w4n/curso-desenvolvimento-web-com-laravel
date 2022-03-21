@@ -30,4 +30,10 @@ class Fornecedor extends Model
 
     /* Pegando todos os dados: */
     /* Fornecedor::all() */
+
+    /* Pegando um item por pk*/
+    /* Fornecedor::find(id) */
+    
+    /* Pegando varios itens por pk*/
+    /* Fornecedor::find([id1, id2]) */
 }
