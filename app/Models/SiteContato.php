@@ -38,4 +38,11 @@ SiteContato::whereIn('motivo_contato', [1, 2])
 Multiplos wheres com or
 SiteContato::whereIn('motivo_contato', [1, 2])
     ->orWhere('telefone', 'like', '(11)%')->get();
+
+Selecionando colunas vazias:
+SiteContato::whereNull('updated_at')->get();
+
+SiteContato::whereNull('updated_at')
+    ->orWhereNull('created_at')
+    ->get();
 */
