@@ -9,3 +9,13 @@ class SiteContato extends Model
 {
     use HasFactory;
 }
+/* 
+Fazendo consultas:
+SiteContato::where('coluna', 'operador', 'valor')->get(); 
+
+Omitindo o igual
+SiteContato::where('coluna', 'valor')->get(); 
+
+Usando Like
+SiteContato::where('coluna', 'like', '%valor%');
+*/
