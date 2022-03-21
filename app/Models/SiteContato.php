@@ -34,4 +34,8 @@ SiteContato::whereNotBetween('coluna', [$indiceInicial, $indiceFinal])
 Multiplos wheres 
 SiteContato::whereIn('motivo_contato', [1, 2])
     ->where('telefone', 'like', '(11)%')->get();
+
+Multiplos wheres com or
+SiteContato::whereIn('motivo_contato', [1, 2])
+    ->orWhere('telefone', 'like', '(11)%')->get();
 */
