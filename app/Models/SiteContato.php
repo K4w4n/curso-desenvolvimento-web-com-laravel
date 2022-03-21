@@ -45,4 +45,16 @@ SiteContato::whereNull('updated_at')->get();
 SiteContato::whereNull('updated_at')
     ->orWhereNull('created_at')
     ->get();
+
+Selecionando por data
+
+SiteContato::whereDate('column', '2022-03-21')->get();
+
+SiteContato::whereDay('column', '21')->get();
+
+SiteContato::whereMonth('column', '2')->get();
+
+SiteContato::whereYear('column', '2')->get();
+
+SiteContato::whereTime('column', '=','22:01:17')->get();
 */
