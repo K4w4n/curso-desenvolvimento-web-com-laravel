@@ -30,4 +30,8 @@ SiteContato::whereBetween('coluna', [$indiceInicial, $indiceFinal])
 
 Pesquisando o inverso do intervalo
 SiteContato::whereNotBetween('coluna', [$indiceInicial, $indiceFinal])
+
+Multiplos wheres 
+SiteContato::whereIn('motivo_contato', [1, 2])
+    ->where('telefone', 'like', '(11)%')->get();
 */
