@@ -24,4 +24,10 @@ SiteContato::whereIn('coluna', ['valor1', 'valor2'...])
 
 Pesquisando o inverso da lista de valores
 SiteContato::whereNotIn('coluna', ['valor1', 'valor2'...]);
+
+Pesquisando intervalos
+SiteContato::whereBetween('coluna', [$indiceInicial, $indiceFinal])
+
+Pesquisando o inverso do intervalo
+SiteContato::whereNotBetween('coluna', [$indiceInicial, $indiceFinal])
 */
