@@ -27,4 +27,7 @@ class Fornecedor extends Model
         'email'->'contato@kawan.com',
         'uf'->'SP'
     ]); */
+
+    /* Pegando todos os dados: */
+    /* Fornecedor::all() */
 }
