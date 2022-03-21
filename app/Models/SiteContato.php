@@ -57,4 +57,8 @@ SiteContato::whereMonth('column', '2')->get();
 SiteContato::whereYear('column', '2')->get();
 
 SiteContato::whereTime('column', '=','22:01:17')->get();
+
+SiteContato::whereColumn('column1', 'column2')->get();
+SiteContato::whereColumn('column1', '<', 'column2')->get();
+SiteContato::whereColumn('column1', '>', 'column2')->get();
 */
