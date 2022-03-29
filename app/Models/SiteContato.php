@@ -61,4 +61,17 @@ SiteContato::whereTime('column', '=','22:01:17')->get();
 SiteContato::whereColumn('column1', 'column2')->get();
 SiteContato::whereColumn('column1', '<', 'column2')->get();
 SiteContato::whereColumn('column1', '>', 'column2')->get();
+
+*/
+/* O seguinte código gera o seguinte sql: 
+   SELECT * 
+    FROM site_contatos 
+    WHERE (nome = 'jorge' or nome = 'ana') 
+      and (motivo_contato in (1, 2) or id between 4 and 6) ;
+
+    SiteContato::where(function ($query) {
+        $query->where('nome', 'jorge')->orWhere('nome', 'ana');
+    })->where(function ($query) {
+        $query->whereIn('motivo_contato', [1, 2])->orWhereBetween('id', [4, 6]);
+    });
 */
