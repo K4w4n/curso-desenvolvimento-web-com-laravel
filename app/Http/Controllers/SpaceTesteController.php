@@ -25,54 +25,41 @@ class SpaceTesteController extends Controller
         ];
         return view('teste.contatos', $data);
     }
-    public function insert()
+    public function insert(Request $request)
     {
-        if (empty($_REQUEST['submit'])) {
+        if (empty($request->input('submit'))) {
             return view('teste.insert');
         } else {
-            $contato = new SiteContato();
-
-            $contato->nome = $_REQUEST['nome'];
-            $contato->telefone = $_REQUEST['telefone'];
-            $contato->email = $_REQUEST['email'];
-            $contato->motivo_contato = $_REQUEST['motivo_contato'];
-            $contato->mensagem = $_REQUEST['mensagem'];
-
-            $contato->save();
-
+            SiteContato::create($request->all());
             return redirect()->route('teste.contatos');
         }
     }
-    public function update()
+    public function update(Request $request)
     {
-        if (empty($_REQUEST['submit'])) {
-            return view('teste.update', SiteContato::where('id', $_REQUEST['id'])->get()[0]);
+        if (empty($request->input('submit'))) {
+
+            return view('teste.update', SiteContato::find($request->input('id')));
+            
         } else {
-
-            $contato = SiteContato::find($_REQUEST['id']);
-            #error_log('Erro');
-            $contato->fill([
-                'nome' => $_REQUEST['nome'],
-                'telefone' => $_REQUEST['telefone'],
-                'email' => $_REQUEST['email'],
-                'motivo_contato' => $_REQUEST['motivo_contato'],
-                'mensagem' => $_REQUEST['mensagem']
-            ]);
+            
+            $contato = SiteContato::find($request->input('id'));
+            
+            $contato->fill($request->all());
 
             $contato->save();
 
             return redirect()->route('teste.contatos');
         }
     }
-    public function delete()
+    public function delete(Request $request)
     {
 
-        $contatosDeletados = SiteContato::destroy($_REQUEST['id']);
+        $contatosDeletados = SiteContato::destroy($request->input('id'));
 
         if ($contatosDeletados >= 1) {
             return redirect()->route('teste.contatos');
         } else {
-            return redirect()->back()->withErrors(['error', "Registo #{$_REQUEST['id']} não pode ser excluído"]);
+            return redirect()->back()->withErrors(['error', "Registo #{$request->input('id')} não pode ser excluído"]);
         }
     }
 }
