@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SiteContato extends Model
 {
+    use SoftDeletes;
     use HasFactory;
+    protected $fillable = ['id', 'nome','telefone','email','motivo_contato','mensagem'];
 }
 /* 
 Fazendo consultas:

@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SpaceTesteController;
+use App\Http\Controllers\PrincipalController;
+use App\Http\Controllers\SobreNosController;
+use App\Http\Controllers\ContatoController;
+use App\Http\Controllers\FornecedoresController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +18,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'App\Http\Controllers\PrincipalController@principal')->name('site.index');
+Route::prefix('/')->group(function () {
+    Route::get('/', [PrincipalController::class, 'principal'])->name('site.index');
+    Route::get('/sobre', [SobreNosController::class, 'sobre'])->name('site.sobrenos');
+    Route::get('/contato', [ContatoController::class, 'contato'])->name('site.contato');
+    Route::post('/contato', [ContatoController::class, 'contato'])->name('site.contato');
+});
 
-Route::get('/sobre', 'App\Http\controllers\SobreNosController@sobre')->name('site.sobrenos');
+Route::prefix('/teste')->group(function () {
+    Route::get('/', [SpaceTesteController::class, 'index'])->name('teste.home');
+    Route::get('/contatos', [SpaceTesteController::class, 'select'])->name('teste.contatos');
 
-Route::get('/contato', 'App\Http\Controllers\ContatoController@contato')->name('site.contato');
-Route::post('/contato', 'App\Http\Controllers\ContatoController@contato')->name('site.contato');
+    Route::get('/insert', [SpaceTesteController::class, 'insert'])->name('teste.insert');
+    Route::get('/update', [SpaceTesteController::class, 'update'])->name('teste.update');
+    Route::post('/delete', [SpaceTesteController::class, 'delete'])->name('teste.delete');
+    Route::get('/delete', [SpaceTesteController::class, 'selectOnlyTrashed'])->name('teste.deleteView');
+
+    Route::get('/teste', function () {
+        $faker = Faker\Factory::create('pt_BR');
+        echo json_encode([
+            'nome' => $faker->name(),
+            'telefone' => $faker->cellphoneNumber(),
+            'email' => $faker->email(),
+            'motivo_contato' => $faker->numberBetween(1, 3),
+            'mensagem' => $faker->sentence(),
+        ]);
+    });
+
+    /* Route::get('/teste/{p1}/{p2}', 'App\Http\Controllers\TesteController@teste'); */
+});
+
 Route::prefix('/app')->group(function () {
 
     Route::get('/login', function () {
@@ -29,8 +58,7 @@ Route::prefix('/app')->group(function () {
         return 'clientes';
     })->name('clientes');
 
-    Route::get('/fornecedores', 'App\Http\Controllers\FornecedoresController@index')
-        ->name('fornecedores');
+    Route::get('/fornecedores', [FornecedoresController::class, 'index'])->name('fornecedores');
 
     Route::get('/produtos', function () {
         return 'produtos';
@@ -55,7 +83,6 @@ Route::get('/rota2', function () {
     return redirect()->route('r1');
 });
 
-Route::get('/teste/{p1}/{p2}', 'App\Http\Controllers\TesteController@teste');
 
 /* Route::redirect('/rota2', '/rota1'); */
 Route::fallback(function () {
