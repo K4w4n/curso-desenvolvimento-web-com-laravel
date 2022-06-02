@@ -27,23 +27,15 @@ Route::prefix('/')->group(function () {
 
 Route::prefix('/teste')->group(function () {
     Route::get('/', [SpaceTesteController::class, 'index'])->name('teste.home');
+
     Route::get('/contatos', [SpaceTesteController::class, 'select'])->name('teste.contatos');
-
-    Route::get('/insert', [SpaceTesteController::class, 'insert'])->name('teste.insert');
-    Route::get('/update', [SpaceTesteController::class, 'update'])->name('teste.update');
-    Route::post('/delete', [SpaceTesteController::class, 'delete'])->name('teste.delete');
+    Route::get('/insert', [SpaceTesteController::class, 'insertView'])->name('teste.insertGet');
+    Route::get('/update', [SpaceTesteController::class, 'updateGet'])->name('teste.update');
     Route::get('/delete', [SpaceTesteController::class, 'selectOnlyTrashed'])->name('teste.deleteView');
-
-    Route::get('/teste', function () {
-        $faker = Faker\Factory::create('pt_BR');
-        echo json_encode([
-            'nome' => $faker->name(),
-            'telefone' => $faker->cellphoneNumber(),
-            'email' => $faker->email(),
-            'motivo_contato' => $faker->numberBetween(1, 3),
-            'mensagem' => $faker->sentence(),
-        ]);
-    });
+    
+    Route::post('/insert', [SpaceTesteController::class, 'insertPost'])->name('teste.insertPost');
+    Route::post('/update', [SpaceTesteController::class, 'updatePost'])->name('teste.updatePost');
+    Route::post('/delete', [SpaceTesteController::class, 'delete'])->name('teste.delete');
 
     /* Route::get('/teste/{p1}/{p2}', 'App\Http\Controllers\TesteController@teste'); */
 });

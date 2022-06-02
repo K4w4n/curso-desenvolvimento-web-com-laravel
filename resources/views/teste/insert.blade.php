@@ -9,7 +9,7 @@
 </head>
 <body>
     
-    <form class="container mt-3" action="{{ route('teste.insert') }}">
+    <form class="container mt-3" action="{{ route('teste.insertPost') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="input-nome" class="form-label">Nome</label>
@@ -27,11 +27,11 @@
         </div>
         
         <div class="mb-3">
-            <label for="motivo_contato" class="form-label">Motivo contato</label>
-            <select name="motivo_contato" id="motivo_contato">
-                <option value="1" selected>Dúvida</option>
-                <option value="2">Elogio</option>
-                <option value="3">Reclamação</option>
+            <label for="motivo_contatos_id" class="form-label">Motivo contato</label>
+            <select name="motivo_contatos_id" id="motivo_contatos_id">
+                @foreach ($motivosContato as $motivoContato)
+                <option value="{{$motivoContato->id}}">{{$motivoContato->motivo_contato}}</option>
+                @endforeach
             </select>
         </div>
 

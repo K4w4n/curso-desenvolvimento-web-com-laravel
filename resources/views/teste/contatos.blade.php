@@ -1,11 +1,11 @@
-@php
+{{-- @php
     $motivoContato = [
     1=>"Dúvida",
     2=>"Elogio",
     3=>"Reclamação"
 ];    
 @endphp
-
+ --}}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -33,22 +33,22 @@
     @foreach ($contatos as $contato)
     <tr>
         <td>
-            {{$contato['id']}}
+            {{$contato->id}}
         </td>
         <td>
-            {{$contato['nome']}}
+            {{$contato->nome}}
         </td>
         <td>
-            {{$contato['telefone']}}
+            {{$contato->telefone}}
         </td>
         <td>
-            {{$contato['email']}}
+            {{$contato->email}}
         </td>
         <td>
-            {{$motivoContato[$contato['motivo_contato']]}}
+            {{$contato->motivo_contato}}
         </td>
         <td>
-            {{$contato['mensagem']}}
+            {{$contato->mensagem}}
         </td>
         <td>
             <input type="button" value="Editar" class="btn btn-warning d-inline" onclick="window,location.assign('{{ route('teste.update', ['id'=>$contato['id']]) }}')" style="width: 100%;">
@@ -61,6 +61,6 @@
     @endforeach
 </tbody>
 </table>
-<a class="btn btn-primary align-self-end m-2" href="{{route('teste.insert')}}">Criar</a>
+<a class="btn btn-primary align-self-end m-2" href="{{route('teste.insertGet')}}">Criar</a>
 </body>
 </html>

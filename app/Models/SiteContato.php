@@ -10,7 +10,7 @@ class SiteContato extends Model
 {
     use SoftDeletes;
     use HasFactory;
-    protected $fillable = ['id', 'nome','telefone','email','motivo_contato','mensagem'];
+    protected $fillable = ['id', 'nome','telefone','email','motivo_contatos_id','mensagem'];
 }
 /* 
 Fazendo consultas:
